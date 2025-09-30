@@ -1,0 +1,8 @@
+src/
+*.ts
+*.map
+tests/
+test/
+example
+src/__tests__/
+jest.config.js
