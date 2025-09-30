@@ -26,13 +26,15 @@ yarn add @dymo-api/better-auth
 
 ```ts
 export const auth = betterAuth({
-	plugins: [
-		dymoEmailPlugin({ 
-			apiKey: "YOUR_API_KEY_HERE",
-			emailRules: {
-				deny: ["FRAUD", "INVALID", "NO_REPLY_EMAIL"]
+    plugins: [
+	    dymoEmailPlugin({ 
+            apiKey: "YOUR_API_KEY_HERE",
+            emailRules: {
+                deny: ["FRAUD", "INVALID", "NO_REPLY_EMAIL"]
 			}
-		})
-	]
+        })
+    ]
 });
 ```
+
+More types of validations coming soon to keep you protected.

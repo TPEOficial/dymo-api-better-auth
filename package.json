@@ -1,6 +1,6 @@
 {
   "name": "@dymo-api/better-auth",
-  "version": "1.2.13",
+  "version": "1.2.14",
   "description": "Flow system for Dymo API.",
   "main": "dist/cjs/dymo-api.js",
   "module": "dist/esm/dymo-api.js",
@@ -32,7 +32,7 @@
     "test": "vitest"
   },
   "repository": {
-    "url": "https://github.com/TPEOficial/dymo-api-node"
+    "url": "https://github.com/TPEOficial/dymo-api-better-auth"
   },
   "keywords": [
     "Dymo",
@@ -43,7 +43,7 @@
   "author": "TPEOficial LLC",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/TPEOficial/dymo-api-node/issues"
+    "url": "https://github.com/TPEOficial/dymo-api-better-auth/issues"
   },
   "homepage": "https://dymo.tpeoficial.com",
   "dependencies": {
