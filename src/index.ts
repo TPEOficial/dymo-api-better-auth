@@ -41,6 +41,7 @@ export const dymoEmailPlugin = ({ apiKey, emailRules }: DymoEmailPluginOptions) 
                             });
                         }
 
+                        ctx.body.email = decision.email;
                         ctx.dymoEmail = decision.response as DataEmailValidationAnalysis;
 
                         return { context: ctx };
