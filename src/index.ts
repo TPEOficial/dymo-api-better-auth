@@ -1,6 +1,6 @@
 import type { BetterAuthPlugin } from "better-auth";
 import { APIError, createAuthMiddleware } from "better-auth/api";
-import DymoAPI, { NegativeEmailRules, EmailValidatorRules } from "dymo-api";
+import DymoAPI, { NegativeEmailRules, EmailValidatorRules, DataEmailValidationAnalysis } from "dymo-api";
 
 interface DymoEmailPluginOptions {
     apiKey: string;
@@ -40,6 +40,8 @@ export const dymoEmailPlugin = ({ apiKey, emailRules }: DymoEmailPluginOptions) 
                                 reasons: decision.reasons
                             });
                         }
+
+                        ctx.dymoEmail = decision.response as DataEmailValidationAnalysis;
 
                         return { context: ctx };
                     })
