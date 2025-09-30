@@ -1,6 +1,6 @@
 {
   "name": "@dymo-api/better-auth",
-  "version": "1.2.12",
+  "version": "1.2.13",
   "description": "Flow system for Dymo API.",
   "main": "dist/cjs/dymo-api.js",
   "module": "dist/esm/dymo-api.js",
