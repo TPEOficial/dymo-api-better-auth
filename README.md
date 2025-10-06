@@ -12,6 +12,8 @@
   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
   <a href="https://docs.tpeoficial.com/docs/dymo-api/integrations/better-auth/getting-started?ch-pg=gh-dmapi-better-auth-rd-step">All Features</a>
   <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+  <a href="https://docs.tpeoficial.com/docs/dymo-api/getting-started/authentication?ch-pg=gh-dmapi-better-auth-rd-step">Node SDK</a>
+  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
   <a href="https://docs.tpeoficial.com/docs/dymo-api/getting-started/faq?ch-pg=gh-dmapi-better-auth-rd-step">FAQ</a>
   <br />
   <hr />
