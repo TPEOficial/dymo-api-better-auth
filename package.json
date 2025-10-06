@@ -1,16 +1,16 @@
 {
   "name": "@dymo-api/better-auth",
-  "version": "1.2.20",
+  "version": "1.2.21",
   "description": "Flow system for Dymo API.",
-  "main": "dist/cjs/dymo-api.js",
-  "module": "dist/esm/dymo-api.js",
-  "types": "dist/types/dymo-api.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "type": "module",
   "exports": {
     ".": {
-      "require": "./dist/cjs/dymo-api.cjs",
-      "import": "./dist/esm/dymo-api.js",
-      "types": "./dist/types/dymo-api.d.ts"
+      "require": "./dist/cjs/index.cjs",
+      "import": "./dist/esm/index.js",
+      "types": "./dist/types/index.d.ts"
     },
     "./*": {
       "require": "./dist/cjs/**/*.cjs",
