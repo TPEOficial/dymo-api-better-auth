@@ -37,4 +37,7 @@ export const auth = betterAuth({
 });
 ```
 
+> [!TIP]
+> Dymo already normalizes the data for you. For example, if the email provided by OAuth is `fo.o+tem.p@gmail.com`, it will transform it into `foo@gmail.com`.
+
 More types of validations coming soon to keep you protected.
