@@ -28,7 +28,20 @@ export const dymoEmailPlugin = ({
         }
     });
 
-    const activePaths = ["/sign-up/email"];
+    const activePaths = [
+        "/sign-up/email",
+        "/email-otp/verify-email",
+        "/sign-in/email-otp",
+        "/sign-in/magic-link",
+        "/forget-password/email-otp",
+        "/email-otp/reset-password",
+        "/email-otp/create-verification-otp",
+        "/email-otp/get-verification-otp",
+        "/email-otp/send-verification-otp",
+        "/forget-password",
+        "/send-verification-email",
+        "/change-email"
+    ];
     if (applyToLogin) activePaths.push("/sign-in/email");
     if (applyToOAuth) {
         activePaths.push("/sign-up/oauth");
