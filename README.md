@@ -61,4 +61,34 @@ export const auth = betterAuth({
 });
 ```
 
+#### IP Validation (Experimental)
+
+```ts
+export const auth = betterAuth({
+    plugins: [
+	    dymoIPPlugin({ 
+            apiKey: "YOUR_API_KEY_HERE",
+            ipRules: {
+                deny: ["FRAUD", "INVALID", "TOR_NETWORK"]
+			}
+        })
+    ]
+});
+```
+
+#### Phone Validation
+
+```ts
+export const auth = betterAuth({
+    plugins: [
+	    dymoPhonePlugin({ 
+            apiKey: "YOUR_API_KEY_HERE",
+            phoneRules: {
+                deny: ["FRAUD", "INVALID"]
+			}
+        })
+    ]
+});
+```
+
 More types of validations coming soon to keep you protected.
