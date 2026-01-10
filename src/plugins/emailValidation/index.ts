@@ -7,13 +7,15 @@ interface DymoEmailPluginOptions {
     applyToLogin?: boolean;
     applyToOAuth?: boolean;
     emailRules?: Partial<EmailValidatorRules>;
+    normalize?: boolean;
 }
 
-export const dymoEmailPlugin = ({ 
+export const dymoEmailPlugin = ({
     apiKey,
     applyToLogin = false,
     applyToOAuth = true,
-    emailRules
+    emailRules,
+    normalize = true
 }: DymoEmailPluginOptions) => {
     const defaultRules: EmailValidatorRules = {
         deny: ["FRAUD", "INVALID", "NO_MX_RECORDS", "NO_REPLY_EMAIL"] as NegativeEmailRules[]
@@ -68,7 +70,7 @@ export const dymoEmailPlugin = ({
                             });
                         }
 
-                        ctx.body.email = decision.email;
+                        if (normalize) ctx.body.email = decision.email;
                         ctx.dymoEmail = decision.response as DataEmailValidationAnalysis;
 
                         return { context: ctx };

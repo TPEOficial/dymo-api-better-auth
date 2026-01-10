@@ -7,13 +7,15 @@ interface DymoPhonePluginOptions {
     applyToLogin?: boolean;
     applyToOAuth?: boolean;
     phoneRules?: Partial<PhoneValidatorRules>;
+    normalize?: boolean;
 }
 
-export const dymoPhonePlugin = ({ 
+export const dymoPhonePlugin = ({
     apiKey,
     applyToLogin = false,
     applyToOAuth = true,
-    phoneRules
+    phoneRules,
+    normalize = true
 }: DymoPhonePluginOptions) => {
     const defaultRules: PhoneValidatorRules = {
         deny: ["FRAUD", "INVALID"] as NegativePhoneRules[]
@@ -61,8 +63,8 @@ export const dymoPhonePlugin = ({
                             });
                         }
 
-                        ctx.body.phoneNumber = decision.phone;
-                        ctx.dymoEmail = decision.response as DataPhoneValidationAnalysis;
+                        if (normalize) ctx.body.phoneNumber = decision.phone;
+                        ctx.dymoPhone = decision.response as DataPhoneValidationAnalysis;
 
                         return { context: ctx };
                     })

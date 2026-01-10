@@ -24,22 +24,22 @@ You can see the library documentation by clicking [here](https://docs.tpeoficial
  - ✅ World's largest fraud validation database | `fakeuser@temp.com` -> **Blocked**.
  - ✅ Fraud validation for personal emails and OAuth (the only one on the market today) | `fakeuser@gmail.com` -> **Blocked**.
  - ✅ Multi-data validation at no additional cost | Validate email addresses, phone numbers, and more at no additional cost, all in one place.
- - ✅ Data normalization | `fo.o+tem.p@gmail.com` -> `foo@gmail.com`.
+ - ✅ Data normalization | `fo.o+tem.p@gmail.com` -> `foo@gmail.com` (can be disabled with `normalize: false`).
 
 #### Installation
 
 Use one of the following commands to install **Dymo API** in your `TS`/`JS` project.
 
 ```bash
-npm i @dymo-api/better-auth
+npm cache clean --force && npm i @dymo-api/better-auth
 
 # or
 
-pnpm i @dymo-api/better-auth
+pnpm cache clean --force && pnpm i @dymo-api/better-auth
 
 # or
 
-yarn add @dymo-api/better-auth
+yarn cache clean --force && yarn add @dymo-api/better-auth
 ```
 
 #### Authenticating ourselves on the client with the API Key
@@ -51,11 +51,12 @@ yarn add @dymo-api/better-auth
 ```ts
 export const auth = betterAuth({
     plugins: [
-	    dymoEmailPlugin({ 
+        dymoEmailPlugin({
             apiKey: "YOUR_API_KEY_HERE",
             emailRules: {
                 deny: ["FRAUD", "INVALID", "NO_REPLY_EMAIL"]
-			}
+            }
+            // normalize: true (default) - Set to false to disable email normalization
         })
     ]
 });
@@ -66,11 +67,12 @@ export const auth = betterAuth({
 ```ts
 export const auth = betterAuth({
     plugins: [
-	    dymoIPPlugin({ 
+        dymoIPPlugin({
             apiKey: "YOUR_API_KEY_HERE",
             ipRules: {
                 deny: ["FRAUD", "INVALID", "TOR_NETWORK"]
-			}
+            }
+            // normalize: true (default) - Set to false to disable IP normalization
         })
     ]
 });
@@ -81,14 +83,25 @@ export const auth = betterAuth({
 ```ts
 export const auth = betterAuth({
     plugins: [
-	    dymoPhonePlugin({ 
+        dymoPhonePlugin({
             apiKey: "YOUR_API_KEY_HERE",
             phoneRules: {
                 deny: ["FRAUD", "INVALID"]
-			}
+            }
+            // normalize: true (default) - Set to false to disable phone normalization
         })
     ]
 });
 ```
 
 More types of validations coming soon to keep you protected.
+
+## Frequently Asked Questions
+
+<details>
+  <summary>Email mismatch error when logging in with Google and others</summary>
+  
+  **Dymo API** normalizes the email by default, removing, for example, the `.` and `+` from the email based on the specific provider, which means that if you are not also normalizing the email in the login via OAuth, you will get a mismatch error.
+
+  To do this, you have two options: the first and correct one would be to also normalize the login email, and the second would be to disable normalization using `normalize: false`.
+</details>

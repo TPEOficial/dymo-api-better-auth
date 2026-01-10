@@ -7,15 +7,17 @@ interface dymoIPPluginOptions {
     applyToLogin?: boolean;
     applyToOAuth?: boolean;
     ipRules?: Partial<IPValidatorRules>;
+    normalize?: boolean;
 }
 
 const ipHeaders = ["x-forwarded-for", "cf-connecting-ip", "x-vercel-forwarded-for", "x-real-ip"];
 
-export const dymoIPPlugin = ({ 
+export const dymoIPPlugin = ({
     apiKey,
     applyToLogin = false,
     applyToOAuth = true,
-    ipRules
+    ipRules,
+    normalize = true
 }: dymoIPPluginOptions) => {
     const defaultRules: IPValidatorRules = {
         deny: ["FRAUD", "INVALID", "TOR_NETWORK"] as NegativeIPRules[]
@@ -77,8 +79,10 @@ export const dymoIPPlugin = ({
                             });
                         }
 
-                        ctx.body.ip = decision.ip;
-                        ctx.request.headers.set("x-dymo-client-ip", decision.ip);
+                        if (normalize) {
+                            ctx.body.ip = decision.ip;
+                            ctx.request.headers.set("x-dymo-client-ip", decision.ip);
+                        }
                         ctx.dymoIP = decision.response as DataIPValidationAnalysis;
                         
                         return { context: ctx };
