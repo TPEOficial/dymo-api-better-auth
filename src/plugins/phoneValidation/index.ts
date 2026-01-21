@@ -1,6 +1,6 @@
 import type { BetterAuthPlugin } from "better-auth";
 import { APIError, createAuthMiddleware } from "better-auth/api";
-import DymoAPI, { NegativePhoneRules, PhoneValidatorRules, DataPhoneValidationAnalysis } from "dymo-api";
+import DymoAPI, { NegativePhoneRules, PhoneValidatorRules, DataPhoneValidationAnalysis, ResilienceConfig } from "dymo-api";
 
 interface DymoPhonePluginOptions {
     apiKey: string;
@@ -8,6 +8,7 @@ interface DymoPhonePluginOptions {
     applyToOAuth?: boolean;
     phoneRules?: Partial<PhoneValidatorRules>;
     normalize?: boolean;
+    resilience?: ResilienceConfig;
 }
 
 export const dymoPhonePlugin = ({
@@ -15,7 +16,8 @@ export const dymoPhonePlugin = ({
     applyToLogin = false,
     applyToOAuth = true,
     phoneRules,
-    normalize = true
+    normalize = true,
+    resilience
 }: DymoPhonePluginOptions) => {
     const defaultRules: PhoneValidatorRules = {
         deny: ["FRAUD", "INVALID"] as NegativePhoneRules[]
@@ -27,7 +29,8 @@ export const dymoPhonePlugin = ({
             phone: {
                 deny: phoneRules?.deny ?? defaultRules.deny
             }
-        }
+        },
+        resilience
     });
 
     const activePaths = [

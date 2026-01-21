@@ -1,6 +1,6 @@
 import type { BetterAuthPlugin } from "better-auth";
 import { APIError, createAuthMiddleware } from "better-auth/api";
-import DymoAPI, { NegativeIPRules, IPValidatorRules, DataIPValidationAnalysis } from "dymo-api";
+import DymoAPI, { NegativeIPRules, IPValidatorRules, DataIPValidationAnalysis, ResilienceConfig } from "dymo-api";
 
 interface dymoIPPluginOptions {
     apiKey: string;
@@ -8,6 +8,7 @@ interface dymoIPPluginOptions {
     applyToOAuth?: boolean;
     ipRules?: Partial<IPValidatorRules>;
     normalize?: boolean;
+    resilience?: ResilienceConfig;
 }
 
 const ipHeaders = ["x-forwarded-for", "cf-connecting-ip", "x-vercel-forwarded-for", "x-real-ip"];
@@ -17,7 +18,8 @@ export const dymoIPPlugin = ({
     applyToLogin = false,
     applyToOAuth = true,
     ipRules,
-    normalize = true
+    normalize = true,
+    resilience
 }: dymoIPPluginOptions) => {
     const defaultRules: IPValidatorRules = {
         deny: ["FRAUD", "INVALID", "TOR_NETWORK"] as NegativeIPRules[]
@@ -29,7 +31,8 @@ export const dymoIPPlugin = ({
             ip: {
                 deny: ipRules?.deny ?? defaultRules.deny
             }
-        }
+        },
+        resilience
     });
 
     const activePaths = [

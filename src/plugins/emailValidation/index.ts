@@ -1,6 +1,6 @@
 import type { BetterAuthPlugin } from "better-auth";
 import { APIError, createAuthMiddleware } from "better-auth/api";
-import DymoAPI, { NegativeEmailRules, EmailValidatorRules, DataEmailValidationAnalysis } from "dymo-api";
+import DymoAPI, { NegativeEmailRules, EmailValidatorRules, DataEmailValidationAnalysis, ResilienceConfig } from "dymo-api";
 
 interface DymoEmailPluginOptions {
     apiKey: string;
@@ -8,6 +8,7 @@ interface DymoEmailPluginOptions {
     applyToOAuth?: boolean;
     emailRules?: Partial<EmailValidatorRules>;
     normalize?: boolean;
+    resilience?: ResilienceConfig;
 }
 
 export const dymoEmailPlugin = ({
@@ -15,7 +16,8 @@ export const dymoEmailPlugin = ({
     applyToLogin = false,
     applyToOAuth = true,
     emailRules,
-    normalize = true
+    normalize = true,
+    resilience
 }: DymoEmailPluginOptions) => {
     const defaultRules: EmailValidatorRules = {
         deny: ["FRAUD", "INVALID", "NO_MX_RECORDS", "NO_REPLY_EMAIL"] as NegativeEmailRules[]
@@ -27,7 +29,8 @@ export const dymoEmailPlugin = ({
             email: {
                 deny: emailRules?.deny ?? defaultRules.deny
             }
-        }
+        },
+        resilience
     });
 
     const activePaths = [
