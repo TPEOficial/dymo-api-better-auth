@@ -2,8 +2,7 @@
     "compilerOptions": {
         "target": "ES2020",
         "module": "ESNext",
-        "ignoreDeprecations": "6.0",
-        "moduleResolution": "Node",
+        "moduleResolution": "Bundler",
         "types": [
             "jest",
             "node"
@@ -12,16 +11,13 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "outDir": "./dist/types",
-        "rootDir": ".",
+        "declaration": true,
+        "declarationMap": true,
         "paths": {
             "@/*": [
                 "./src/*"
             ]
-        },
-        "declaration": true,
-        "declarationDir": "./dist/types",
-        "emitDeclarationOnly": true
+        }
     },
     "include": [
         "src/**/*",
@@ -29,6 +25,7 @@
     ],
     "exclude": [
         "node_modules",
+        "dist",
         "jest.config.js"
     ]
 }
