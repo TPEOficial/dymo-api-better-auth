@@ -22,7 +22,7 @@ export const dymoIPPlugin = ({
     resilience
 }: dymoIPPluginOptions) => {
     const defaultRules: IPValidatorRules = {
-        deny: ["FRAUD", "INVALID", "TOR_NETWORK"] as NegativeIPRules[]
+        deny: ["FRAUD", "INVALID", "VPN", "TOR_NETWORK"] as NegativeIPRules[]
     };
 
     const dymoClient = new DymoAPI({
